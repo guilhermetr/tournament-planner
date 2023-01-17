@@ -1,0 +1,76 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace TournamentPlannerAPI.Migrations
+{
+    /// <inheritdoc />
+    public partial class AddGames : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Game_Tournaments_TournamentId",
+                table: "Game");
+
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Game",
+                table: "Game");
+
+            migrationBuilder.RenameTable(
+                name: "Game",
+                newName: "Games");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Game_TournamentId",
+                table: "Games",
+                newName: "IX_Games_TournamentId");
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Games",
+                table: "Games",
+                column: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Games_Tournaments_TournamentId",
+                table: "Games",
+                column: "TournamentId",
+                principalTable: "Tournaments",
+                principalColumn: "Id");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Games_Tournaments_TournamentId",
+                table: "Games");
+
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Games",
+                table: "Games");
+
+            migrationBuilder.RenameTable(
+                name: "Games",
+                newName: "Game");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Games_TournamentId",
+                table: "Game",
+                newName: "IX_Game_TournamentId");
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Game",
+                table: "Game",
+                column: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Game_Tournaments_TournamentId",
+                table: "Game",
+                column: "TournamentId",
+                principalTable: "Tournaments",
+                principalColumn: "Id");
+        }
+    }
+}
